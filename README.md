@@ -16,7 +16,7 @@ Planetary API is a simple RESTful API built using Flask and SQLAlchemy for manag
 
 ### 1. Clone the repository:
 
-``` git clone https://github.com/yourusername/planetary-api.git```
+``` git clone https://github.com/yugannkt/REST_API.git ```
 
 ### 2. Set up environment variables:
 
