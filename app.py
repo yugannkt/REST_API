@@ -12,8 +12,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'planets.db')
 app.config['JWT_SECRET_KEY'] = 'super-secret'  
 app.config['MAIL_SERVER'] = 'smtp.mailtrap.io'
-app.config['MAIL_USERNAME'] = os.environ['MAIL_USERNAME'] #set your mail username
-app.config['MAIL_PASSWORD'] = os.environ['MAIL_PASSWORD'] # set your mail password
+#app.config['MAIL_USERNAME'] = os.environ['MAIL_USERNAME'] #set your mail username
+#app.config['MAIL_PASSWORD'] = os.environ['MAIL_PASSWORD'] # set your mail password
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
@@ -89,7 +89,7 @@ def url_variables(name: str, age: int):
 def planets():
     planets_list = Planet.query.all()
     result = planets_schema.dump(planets_list)
-    return jsonify(result.data)
+    return jsonify(result)
 
 
 @app.route('/register', methods=['POST'])
@@ -193,7 +193,7 @@ def update_planet():
 
 
 @app.route('/remove_planet/<int:planet_id>', methods=['DELETE'])
-@jwt_required
+@jwt_required()
 def remove_planet(planet_id: int):
     planet = Planet.query.filter_by(planet_id=planet_id).first()
     if planet:
