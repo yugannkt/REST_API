@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: planets-deployment # name of the deployment
+ 
+spec:
+ template: # pod defintion
+   metadata:
+     name: planet # name of the pod
+     labels:
+       app: planet
+       tier: frontend
+   spec:
+     containers:
+       - name: planet
+         image: yugannkt/my-planets:latest
+ replicas: 3
+ selector: # Mandatory, Select the pods which needs to be in the replicaset
+   matchLabels:
+     app: planet
+     tier: frontend
